@@ -1,0 +1,38 @@
+<html>
+<head>
+	
+  	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js" type="text/javascript"></script>
+
+</head>
+<body>
+	<script src="http://cdn.buglabs.net/swarm/swarm-v0.4.0.js" type="text/javascript"></script>
+	<script src="js/map.js"></script>
+	<script>
+		$(document).ready(function() {
+			var map = new Map();
+
+			var swarmOptions = {
+				keys: {
+					cfg: '27ed863c64311b5af0ddfe184f157df7509ed416',
+					prt: 'd0cca747e94e3d604f695e262dabfd9baeebc78a'
+				},
+				resource_id: '34b7954aecf4866cace6574f5913f6a57e2f8787',
+				swarm_id: '93d584b22f3281eb5f6895a8adbbdf88a9c729fb'
+			};
+
+			var swarmListener = new SwarmListener(swarmOptions, map);
+
+			SWARM.connect({
+				apikey: swarmOptions.keys.prt,
+              	resource: swarmOptions.resource_id,
+              	swarms: swarmOptions.swarm_id,
+              	onconnect: swarmListener.onConnect(),
+              	ondisconnect: swarmListener.onDisconnect,
+              	onpresence: swarmListener.onPresence(),
+              	onmessage: swarmListener.onMessage(),
+              	onerror: swarmListener.onError
+            });
+		})
+	</script>
+</body>
+</html>
